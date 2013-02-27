@@ -10,8 +10,8 @@ module Achievements
     end
   end
 
-  def award_achievement(achievement, level = nil, ref = nil, points)
-    achievement.create!(:achievable => self, :level => level, :ref => ref, :points => points)
+  def award_achievement(achievement, level = nil, points, ref = nil)
+    achievement.create!(:achievable => self, :level => level, , :points => points, :ref => ref)
   end
   
   def has_achievement?(achievement, level = nil)
