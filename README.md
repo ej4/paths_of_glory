@@ -44,9 +44,10 @@ Create a new achievement with the name Glory, which observers the User model:
 
     rails generate achievement Glory User
     
-This gives you `app/models/achievements/glory.rb` and `app/models/achievements/glory_observer.rb` with some bootstrapped code. Edit these files to meet your needs. Finally, you will need to activate the observer, by adding `:glory_observer` to your list of observers in `application.rb`.
+This gives you `app/models/achievements/glory.rb` and `app/models/achievements/glory_observer.rb` with some bootstrapped code. Edit these files to meet your needs. Finally, you will need to activate the observers by adding the following to `application.rb`:
 
-    config.active_record.observers = :glory_observer, :some_other_observer
+    # Achievement Observers
+    config.active_record.observers = Dir["app/models/achievements/*_observer.rb"].map {|f| File.basename(f, '.rb').to_sym}
     
 The Achievement
 ===============
