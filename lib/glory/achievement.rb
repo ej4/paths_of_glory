@@ -77,5 +77,9 @@ class Achievement < ActiveRecord::Base
         return nil
       end
     end
+
+    def image
+      "#{self.name.underscore}.png"
+    end
   end
 end
