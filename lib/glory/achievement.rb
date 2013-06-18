@@ -18,7 +18,7 @@ class Achievement < ActiveRecord::Base
 
   def self.load_subclasses
     # Load all of the achievements' subclasses
-    Dir["#{Rails.root}/app/models/achievements/*.rb"].each {|file| require file }
+    Dir["#{Rails.root}/app/models/achievements/*.rb"].each {|file| require_dependency file }
   end
 
   class << self
