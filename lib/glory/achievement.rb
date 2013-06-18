@@ -16,9 +16,11 @@ class Achievement < ActiveRecord::Base
   #scope :order, lambda { |order| {:order => order} }
   #scope :limit, lambda { |limit| {:limit => limit} }
 
-  # Load all of the achievements' subclasses
-  Dir["#{Rails.root}/app/models/achievements/*.rb"].each {|file| require_dependency file }
-  
+  def self.load_subclasses
+    # Load all of the achievements' subclasses
+    Dir["#{Rails.root}/app/models/achievements/*.rb"].each {|file| require_dependency file }
+  end
+
   class << self
     def levels
       @levels ||= []
