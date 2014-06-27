@@ -27,13 +27,13 @@ class Achievement < ActiveRecord::Base
       end
     end
     
-    def title
-      "CourseViews Achievement"
+    def title(name)
+      return "#{name} Achievement"
     end
     
     # Change to reflect the purpose of this achievement.
-    def description
-      'For watching courses (10 courses)'
+    def description(description)
+      return description
     end
     
     # Change the image to use for the achievement.
