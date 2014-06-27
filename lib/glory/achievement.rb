@@ -18,37 +18,37 @@ class Achievement < ActiveRecord::Base
   
   class << self
 
-    # def award_achievements_for(user)
-    #   return unless user
-    #   levels.each do |level|
-    #     if !user.has_achievement?(self, level[:level]) and thing_to_check(user) >= level[:quota]
-    #       user.award_achievement(self, level[:level], level[:points])
-    #     end
-    #   end
-    # end
+    def award_achievements_for(user)
+      return unless user
+      levels.each do |level|
+        if !user.has_achievement?(self, level[:level]) and thing_to_check(user) >= level[:quota]
+          user.award_achievement(self, level[:level], level[:points])
+        end
+      end
+    end
     
-    # def title(name)
-    #   return "#{name} Achievement"
-    # end
+    def title(name)
+      return "#{name} Achievement"
+    end
     
-    # # Change to reflect the purpose of this achievement.
-    # def description(description)
-    #   return description
-    # end
+    # Change to reflect the purpose of this achievement.
+    def description(description)
+      return description
+    end
     
-    # # Change the image to use for the achievement.
-    # #  Be sure to include this file in Rails.root/public/images
-    # def image
-    #   'achievement-default.png'
-    # end
+    # Change the image to use for the achievement.
+    #  Be sure to include this file in Rails.root/public/images
+    def image
+      'achievement-default.png'
+    end
 
-    # def points_possible
-    #   sum = 0
-    #   levels.each do |level|
-    #     sum += level[:points]
-    #   end
-    #   return sum
-    # end 
+    def points_possible
+      sum = 0
+      levels.each do |level|
+        sum += level[:points]
+      end
+      return sum
+    end 
 
     def levels
       @levels ||= []
