@@ -3,7 +3,7 @@ class Achievement < ActiveRecord::Base
   belongs_to :achievable, :polymorphic => true
   belongs_to :ref, :polymorphic => true
 
-  attr_accessible :type, :level, :achieveable_id, :achievable_type, :ref_id, :ref_type, :achievable, :ref, :points
+  # attr_accessible :type, :level, :achieveable_id, :achievable_type, :ref_id, :ref_type, :achievable, :ref, :points
 
   
   scope :recent, :order => "created_at desc"
@@ -28,7 +28,7 @@ class Achievement < ActiveRecord::Base
     end
     
     def title(name)
-      return "#{name} Achievement"
+      return name
     end
     
     # Change to reflect the purpose of this achievement.
