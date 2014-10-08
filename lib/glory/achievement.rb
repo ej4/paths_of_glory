@@ -3,7 +3,7 @@ class Achievement < ActiveRecord::Base
   belongs_to :achievable, :polymorphic => true
   belongs_to :ref, :polymorphic => true
 
-  attr_accessible :type, :level, :achieveable_id, :achievable_type, :ref_id, :ref_type, :achievable, :ref, :points
+  attr_accessible :type, :level, :achieveable_id, :achievable_type, :ref_id, :ref_type, :achievable, :ref
 
   
   scope :recent, :order => "created_at desc"
@@ -15,7 +15,12 @@ class Achievement < ActiveRecord::Base
   
   #scope :order, lambda { |order| {:order => order} }
   #scope :limit, lambda { |limit| {:limit => limit} }
-  
+
+  def self.load_subclasses
+    # Load all of the achievements' subclasses
+    Dir["#{Rails.root}/app/models/achievements/*.rb"].each {|file| require_dependency file }
+  end
+
   class << self
 
     # def award_achievements_for(user)
@@ -55,7 +60,7 @@ class Achievement < ActiveRecord::Base
     end
 
     def level(level, options = {})
-      levels << {:level => level, :quota => options[:quota], :title => options[:title], :description => options[:description], :image => options[:image], :points => options[:points]}
+      levels << {:level => level, :quota => options[:quota], :title => options[:title], :description => options[:description], :image => options[:image]}
     end
     
     def set_thing_to_check(&block)
@@ -72,10 +77,6 @@ class Achievement < ActiveRecord::Base
     
     def quota_for(level)
       select_level(level)[:quota] if select_level(level)
-    end
-    
-    def points_for(level)
-      select_level(level)[:points] if select_level(level)
     end
     
     def has_level?(level)
@@ -108,6 +109,10 @@ class Achievement < ActiveRecord::Base
       else
         return nil
       end
+    end
+
+    def image
+      "#{self.name.underscore}.png"
     end
   end
 end

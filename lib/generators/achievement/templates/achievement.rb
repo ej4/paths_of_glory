@@ -34,8 +34,8 @@ class <%= class_name %> < Achievement
   
   # Change the image to use for the achievement.
   #  Be sure to include this file in Rails.root/public/images
-  def self.image
-    'achievement-default.png'
-  end
+  # def self.image
+  #   'achievement-default.png'
+  # end
   
 end
