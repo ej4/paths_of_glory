@@ -7,7 +7,7 @@ class Achievement < ActiveRecord::Base
 
   
   scope :recent, -> { order("created_at desc") }
-  scope :kind_of, -> { |type| { where(type: type.to_s) } } do
+  scope :kind_of, -> { where(type: type.to_s) } do
     def current
       order("level desc").limit(1).first
     end
