@@ -6,8 +6,8 @@ class Achievement < ActiveRecord::Base
   # attr_accessible :type, :level, :achieveable_id, :achievable_type, :ref_id, :ref_type, :achievable, :ref, :points
 
   
-  scope :recent, :order => "created_at desc"
-  scope :kind_of, lambda { |type| {:conditions => {:type => type.to_s}}} do
+  scope :recent, -> { order("created_at desc") }
+  scope :kind_of, -> { |type| { where(type: type.to_s) } } do
     def current
       order("level desc").limit(1).first
     end
